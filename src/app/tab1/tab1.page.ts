@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { PD } from './pd';
+import { PostsService } from './../posts.service';
+import { Component, OnInit } from '@angular/core';
+import { Post } from './post';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +10,17 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  p = PD;
+  posts:Post[];
+  constructor(private postsService: PostsService) {}
+
+  
+  getPosts(): void {
+    this.postsService.getPosts().subscribe(posts => this.posts = this.posts);
+  }
+
+  ngOnInit() {
+     this.getPosts();
+  }
 
 }
